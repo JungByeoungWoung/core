@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class OrderServiceTest {
     MemberService memberService = new MemberServiceImpl();
     OrderService orderService = new OrderServiceImpl();
-
+//주문 생성 기능 테스트
     @Test
     void createOrder(){
         //given
