@@ -3,6 +3,7 @@ package hello.core;
 import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
 import hello.core.discount.RateDiscountPolicy;
+import hello.core.member.MemberRepository;
 import hello.core.member.MemberService;
 import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
@@ -17,9 +18,16 @@ public class AppConfig {
     //원하는 구현 객체를 선택 할 수 있음
     //new MemoryMemberRepository() -> 래퍼런스라고 하는듯
     public MemberService memberService(){
-        return new MemberServiceImpl(new MemoryMemberRepository());
+        return new MemberServiceImpl(memberRepository());
+    }
+    private MemberRepository memberRepository(){
+        return new MemoryMemberRepository();
     }
     public OrderService orderService(){
-        return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+    }
+    private DiscountPolicy discountPolicy(){
+//        return new FixDiscountPolicy();
+        return new RateDiscountPolicy();
     }
 }
