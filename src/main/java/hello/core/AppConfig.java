@@ -9,7 +9,7 @@ import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
 import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
-//역할을 담당
+//기획을 담당
 //애플리케이션 전체를 설정하고 구성하는 클래스
 public class AppConfig {
 
