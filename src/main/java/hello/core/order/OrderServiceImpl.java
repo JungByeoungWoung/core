@@ -8,13 +8,15 @@ import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService{
-    private final MemberRepository memberRepository;
     //OrderServiceImpl은 추상 인터페이스인 DiscountPolicy에도 의존 하고 있으며,
     //추가로 new FixDiscountPolicy()를 보면 알수 있듯이 구현 객체인 FixDiscountPolicy도 의존하고 있다.
     //private DiscountPolicy discountPolicy = new FixDiscountPolicy();
     //아래와 같이 코드를 변경하면 인테페이스에만 의존할 수 있게 변경 가능하다.
+    //MemberRepository 참조 하는 것을 알 수 있다.
+    //memberRepository는 참조 값이다.
+    private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
-
+    //OrderServiceImpl은 MemberRepository와 DiscountPolicy에만 의존 하는 것을 알 수 있다.
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
