@@ -1,11 +1,15 @@
 package hello.core.member;
 
+import hello.core.AppConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.util.Assert;
 
 public class MemberServiceTest {
-    MemberService memberService = new MemberServiceImpl();
+    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+    MemberService memberService = ac.getBean("memberService", MemberService.class);
     @Test
     void join(){
         //given -> 어떠한 값을 주고
