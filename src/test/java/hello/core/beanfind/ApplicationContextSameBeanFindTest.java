@@ -44,7 +44,7 @@ public class ApplicationContextSameBeanFindTest {
             System.out.println("key = "+ key +"value = "+beansOfType.get(key));
         }
         System.out.println("beansOfType " + beansOfType);
-        assertThat(beansOfType.size()).isEqualTo(2);
+        //assertThat(beansOfType.size()).isEqualTo(2);
     }
     @Configuration
     //static을 class 앞에 선언 하면 해당 클래스 파일 안에서만 static을 선언해준 클래스를 이용하겠다는 의미
@@ -54,9 +54,9 @@ public class ApplicationContextSameBeanFindTest {
             return new MemoryMemberRepository();
         }
 
-        @Bean
-        public MemberRepository memberRepository2() {
-            return new MemoryMemberRepository();
-        }
+//        @Bean
+//        public MemberRepository memberRepository2() {
+//            return new MemoryMemberRepository();
+//        }
     }
 }
