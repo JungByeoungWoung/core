@@ -17,7 +17,9 @@ public class BeanLifeCycleTest {
     static class LifeCycleConfig{
         @Bean
         public NetworkClient networkClient(){
+            //생성자 호출,의존 관계 주입
             NetworkClient networkClient = new NetworkClient();
+            //의존관계 주입 후 .setUrl 실행
             networkClient.setUrl("http://hello-spring.dev");
             return networkClient;
         }
