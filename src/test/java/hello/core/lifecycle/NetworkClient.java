@@ -1,5 +1,8 @@
 package hello.core.lifecycle;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 public class NetworkClient{
     private String url;
 
@@ -24,12 +27,13 @@ public class NetworkClient{
     }
 
     //의존 관계 주입이 끝나면 실행되는 메서드
+    @PostConstruct
     public void init(){
         System.out.println("NetworkClient.init");
         connect();
         call("초기화 연결 메시지");
     }
-
+    @PreDestroy
     //애플리케이션이 종료 되기 직전에 호출되는 메서드
     public void close(){
         System.out.println("NetworkClient.close");

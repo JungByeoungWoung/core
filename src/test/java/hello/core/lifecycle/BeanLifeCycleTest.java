@@ -15,7 +15,8 @@ public class BeanLifeCycleTest {
     }
     @Configuration
     static class LifeCycleConfig{
-        @Bean(initMethod = "init",destroyMethod = "close")
+        //빈 등록 시 initMethod,destroyMethod 작성 ""안에는 메서드 명을 적어주면 됨
+        @Bean
         public NetworkClient networkClient(){
             //생성자 호출,의존 관계 주입
             NetworkClient networkClient = new NetworkClient();
