@@ -15,7 +15,7 @@ public class BeanLifeCycleTest {
     }
     @Configuration
     static class LifeCycleConfig{
-        @Bean
+        @Bean(initMethod = "init",destroyMethod = "close")
         public NetworkClient networkClient(){
             //생성자 호출,의존 관계 주입
             NetworkClient networkClient = new NetworkClient();
