@@ -2,6 +2,7 @@ package hello.core.scope;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -31,17 +32,25 @@ public class SingletonWithPrototypeTest1 {
         Assertions.assertThat(count1).isEqualTo(1);
         ClientBean clientBean2 = ac.getBean(ClientBean.class);
         int count2 = clientBean2.logic();
-        Assertions.assertThat(count2).isEqualTo(2);
+        Assertions.assertThat(count2).isEqualTo(1);
     }
     @Scope("singleton")
     static class ClientBean{
-        private final PrototypeBean prototypeBean;
-        //빈 생성 시점에 주입
+        //private final PrototypeBean prototypeBean;
+        //항상 새로운 프로토타입 빈을 생성하게 해줌 -> ObjectProvider
+        private final ObjectProvider<PrototypeBean> prototypeBeanObjectProvider;
         @Autowired
-        public ClientBean(PrototypeBean prototypeBean){
-            this.prototypeBean = prototypeBean;
+        public ClientBean(ObjectProvider<PrototypeBean> prototypeBeanObjectProvider){
+            this.prototypeBeanObjectProvider = prototypeBeanObjectProvider;
         }
+
+        //빈 생성 시점에 주입
+//        @Autowired
+//        public ClientBean(PrototypeBean prototypeBean){
+//            this.prototypeBean = prototypeBean;
+//        }
         public int logic(){
+            PrototypeBean prototypeBean= prototypeBeanObjectProvider.getObject();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
