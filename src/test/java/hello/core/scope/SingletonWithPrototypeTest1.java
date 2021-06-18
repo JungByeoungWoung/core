@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
 public class SingletonWithPrototypeTest1 {
     @Test
@@ -38,9 +39,9 @@ public class SingletonWithPrototypeTest1 {
     static class ClientBean{
         //private final PrototypeBean prototypeBean;
         //항상 새로운 프로토타입 빈을 생성하게 해줌 -> ObjectProvider
-        private final ObjectProvider<PrototypeBean> prototypeBeanObjectProvider;
+        private final Provider<PrototypeBean> prototypeBeanObjectProvider;
         @Autowired
-        public ClientBean(ObjectProvider<PrototypeBean> prototypeBeanObjectProvider){
+        public ClientBean(Provider<PrototypeBean> prototypeBeanObjectProvider){
             this.prototypeBeanObjectProvider = prototypeBeanObjectProvider;
         }
 
@@ -50,7 +51,7 @@ public class SingletonWithPrototypeTest1 {
 //            this.prototypeBean = prototypeBean;
 //        }
         public int logic(){
-            PrototypeBean prototypeBean= prototypeBeanObjectProvider.getObject();
+            PrototypeBean prototypeBean= prototypeBeanObjectProvider.get();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
